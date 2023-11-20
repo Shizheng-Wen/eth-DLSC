@@ -37,6 +37,7 @@ After calculating these residuals, sum them up after doing `torch.mean(abs(resid
   - **Result file: *Task2/result_PINNinv.txt* ; Code file _Task2/PINN_inverse.ipynb_**
 - *FD_differentiation.ipynb*: I also tried another approach, writing a FD solver and differentiating through it to optimise for the temperature values. In this code, values of the *Ts_prediction* are the trainable parameter. Using Finite difference (implicit Euler + central differentiation) based on random initialization *Ts_prediction*, we can calculate the Tf_prediction. And the difference between  Tf_prediction and Tf_accurate is our loss function. The optimization process is really fast. It takes less than 5 miniutes to train the model. The results is as follows:
   - **Results:**
+
 ![](assets/image-20230615191935873.png)
 ![](assets/image-20230615191959604.png)
   - <font color=red> ⚠️: It should be noted that the result of Ts_prediction will have very large values at some region. And I found the gradient at this region is very large. I this the reason for it may be the numerical instability. To show the result clearly, I used `torch.clamp(FDopt.pred_Ts(),0,4)` to restrict the result in the region of [0,4].</font>
