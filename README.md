@@ -30,6 +30,7 @@ After calculating these residuals, sum them up after doing `torch.mean(abs(resid
 
 - *PINN_inverse.ipyn*: I used PINN to solve the inverse problem. In my code, `self.approximate_solution` and `self.approximate_coefficient` represent the solution for $T_f$ and $T_s$ respectively. I think the most important part in this code is that I need to seperate the sampled boundary points and calculate these corresponding boundary loss respectively.  The inverse PINN is really hard to train. In order to train these model, I firstly used Adam to train the model into a local minimum. Then, I stored the parameters of the model and used LBFGS to train the stored model further. Although in this way, it takes me nearly 3 hours to get the total loss -1.1399 in my Mac M2 laptop. And the result is as follows:
   - **Result:**
+
 ![](assets/image-20230615190606966.png)
 ![](assets/image-20230615190637558.png)
   - Although the tendency is correct, we can clearly see that the result is not so good. For *Ts_prediction*, it don't have the perfect periodic result, and the result at $t = 0, x = 4$ seems not smooth. This may due to the reason that the sampled points at this region is not enough.
